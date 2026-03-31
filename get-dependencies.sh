@@ -6,21 +6,42 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-# pacman -Syu --noconfirm PACKAGESHERE
+pacman -Syu --noconfirm \
+    cmake               \
+    fooyin              \
+    lxqt-qtplugin       \
+    kdsingleapplication \
+    kvantum             \
+    pipewire-audio      \
+    pipewire-jack       \
+    qcoro               \
+    qt6ct               \
+    sdl2-compat         \
+    taglib
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini libdecor-mini
 
-# Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
+echo "Building fooyin-plugin-libvgm..."
+echo "---------------------------------------------------------------"
+REPO="https://github.com/fooyin/fooyin-plugin-libvgm"
+VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+git clone --recursive --depth 1 "$REPO" ./fooyin-plugin-libvgm
+echo "$VERSION" > ~/version
 
-# If the application needs to be manually built that has to be done down here
+cmake -B build-libvgm -S ./fooyin-plugin-libvgm -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build build-libvgm -j$(nproc)
+cmake --install build-libvgm
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+echo "Building fooyin-plugin-msuinput..."
+echo "---------------------------------------------------------------"
+REPO="https://github.com/Vo1dTear/fooyin-plugin-msuinput"
+VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
+git clone --depth 1 "$REPO" ./fooyin-plugin-msuinput
+echo "$VERSION" > ~/version
+
+cmake -B build-msuinput -S ./fooyin-plugin-msuinput -DCMAKE_BUILD_TYPE=Release
+cmake --build build-msuinput -j$(nproc)
+cmake --install build-msuinput
+
