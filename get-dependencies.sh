@@ -8,6 +8,7 @@ echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     libdecor            \
+    libnotify           \
     lxqt-qtplugin       \
     kdsingleapplication \
     kvantum             \
