@@ -15,7 +15,7 @@ export QT_DIR=qt6
 export DEPLOY_PIPEWIRE=1
 
 # Deploy dependencies
-quick-sharun /usr/bin/fooyin /usr/lib/libnotify.so*
+quick-sharun /usr/bin/fooyin
 
 # Additional changes can be done in between here
 
