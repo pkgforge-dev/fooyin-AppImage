@@ -14,7 +14,7 @@ pacman -Syu --noconfirm \
     pipewire-jack       \
     qcoro               \
     qt6ct               \
-    sdl2                \
+    sdl2-compat         \
     taglib
 
 echo "Installing debloated packages..."
