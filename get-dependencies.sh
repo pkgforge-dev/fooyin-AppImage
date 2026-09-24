@@ -35,9 +35,9 @@ VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone --recursive --depth 1 "$REPO" ./fooyin-plugin-libvgm
 echo "$VERSION" > ~/version
 
-cmake -B build -S ./fooyin-plugin-libvgm -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
-cmake --build build -j$(nproc)
-cmake --install build
+cmake -B build-libvgm -S ./fooyin-plugin-libvgm -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build build-libvgm -j$(nproc)
+cmake --install build-libvgm
 
 echo "Building fooyin-plugin-msuinput..."
 echo "---------------------------------------------------------------"
@@ -46,7 +46,7 @@ VERSION="$(git ls-remote "$REPO" HEAD | cut -c 1-9 | head -1)"
 git clone --depth 1 "$REPO" ./fooyin-plugin-msuinput
 echo "$VERSION" > ~/version
 
-cmake -B build -S ./fooyin-plugin-msuinput -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j$(nproc)
-cmake --install build
+cmake -B build-msuinput -S ./fooyin-plugin-msuinput -DCMAKE_BUILD_TYPE=Release
+cmake --build build-msuinput -j$(nproc)
+cmake --install build-msuinput
 
