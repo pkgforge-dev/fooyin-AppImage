@@ -7,6 +7,7 @@ ARCH=$(uname -m)
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
+    fooyin              \
     lxqt-qtplugin       \
     kdsingleapplication \
     kvantum             \
@@ -22,17 +23,7 @@ echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini libdecor-mini
 
 # Comment this out if you need an AUR package
-make-aur-package libvgm-git
-make-aur-package fooyin
-make-aur-package fooyin-plugin-libvgm-git
-make-aur-package fooyin-plugin-msuinput-git
-
-# If the application needs to be manually built that has to be done down here
-
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+#make-aur-package libvgm-git
+#make-aur-package fooyin
+#make-aur-package fooyin-plugin-libvgm-git
+#make-aur-package fooyin-plugin-msuinput-git
